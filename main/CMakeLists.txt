@@ -1,6 +1,5 @@
-idf_component_register(SRCS "main.c" "usb_descriptors.c"
-                    INCLUDE_DIRS "."
-                    REQUIRES freertos soc)
+idf_component_register(SRCS "main.c"  "usb_descriptors.c"
+                    INCLUDE_DIRS ".")
 
 target_include_directories(${COMPONENT_LIB} PRIVATE .)
 
@@ -13,6 +12,7 @@ set(TINYUSB "${CMAKE_SOURCE_DIR}/lib/tinyusb")
 message(TINYUSB: ${TINYUSB})
 
 target_include_directories(${COMPONENT_TARGET} PUBLIC
+  "$ENV{IDF_PATH}/common_components/led_strip/include"
   "$ENV{IDF_PATH}/components/freertos/include/freertos"
   "${TINYUSB}/hw"
   "${TINYUSB}/src"

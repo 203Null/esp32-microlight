@@ -30,8 +30,6 @@
  extern "C" {
 #endif
 
-// #pragma message ( "TUSB Config loaded" )
-
 //--------------------------------------------------------------------
 // COMMON CONFIGURATION
 //--------------------------------------------------------------------
@@ -66,18 +64,12 @@
   #error "Incorrect RHPort configuration"
 #endif
 
-// This examples use FreeRTOS
+#ifndef CFG_TUSB_OS
 #define CFG_TUSB_OS               OPT_OS_FREERTOS
-
-// Espressif IDF requires "freertos/" prefix in include path
-// #if TU_CHECK_MCU(ESP32S2) || TU_CHECK_MCU(ESP32S3)
-//   #define CFG_TUSB_OS_INC_PATH    freertos/
-// #endif
-
-
-#ifndef CFG_TUSB_DEBUG
-#define CFG_TUSB_DEBUG           0
 #endif
+
+// CFG_TUSB_DEBUG is defined by compiler in DEBUG build
+// #define CFG_TUSB_DEBUG           0
 
 /* USB DMA on some MCUs can only access a specific SRAM region with restriction on alignment.
  * Tinyusb use follows macros to declare transferring memory so that they can be put
@@ -103,14 +95,15 @@
 #endif
 
 //------------- CLASS -------------//
-#define CFG_TUD_HID               1
 #define CFG_TUD_CDC               0
 #define CFG_TUD_MSC               0
-#define CFG_TUD_MIDI              0
+#define CFG_TUD_HID               0
+#define CFG_TUD_MIDI              1
 #define CFG_TUD_VENDOR            0
 
-// HID buffer size Should be sufficient to hold ID (if any) + Data
-#define CFG_TUD_HID_EP_BUFSIZE    16
+// MIDI FIFO size of TX and RX
+#define CFG_TUD_MIDI_RX_BUFSIZE   (TUD_OPT_HIGH_SPEED ? 512 : 64)
+#define CFG_TUD_MIDI_TX_BUFSIZE   (TUD_OPT_HIGH_SPEED ? 512 : 64)
 
 #ifdef __cplusplus
  }

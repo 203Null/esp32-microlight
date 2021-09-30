@@ -13,11 +13,60 @@
 #include "driver/periph_ctrl.h"
 #include "driver/rmt.h"
 
-// #include "tinyusb.h"
+#include "led_strip.h"
 #include "tusb.h"
-// #include "led_strip.h"
 
-// #define CFG_TUSB_CONFIG_FILE "microlight_tusb_config.h"
+static const char *TAG = "Microlight";
+
+#define RMT_TX_CHANNEL RMT_CHANNEL_0
+
+led_strip_t *strip;
+
+void set_color(uint8_t index, uint32_t color, uint8_t brightness) //index是LED的位置， color是颜色
+{
+    //Color = 00000000RRRRRRRRGGGGGGGGBBBBBBB
+    uint16_t R = (color & 0xFF0000) >> 16; //00000000 00000000 00000000 RRRRRRRR
+    uint16_t G = (color & 0x00FF00) >> 8; //00000000 00000000 00000000 RRRRRRRR
+    uint16_t B = color & 0x0000FF;
+    if(brightness != 255)
+    {
+        R = (R * brightness) >> 8;
+        G = (G * brightness) >> 8;
+        B = (B * brightness) >> 8;
+    }
+    strip->set_pixel(strip, index, R, G, B);
+}
+
+void update_strip()
+{
+    strip->refresh(strip, 100);
+}
+
+void delay(uint32_t ms)
+{
+    vTaskDelay(pdMS_TO_TICKS(ms));
+}
+
+void setup_led(void) //配置WS2812驱动硬件（RMT)
+{
+    rmt_config_t config = RMT_DEFAULT_CONFIG_TX(48, RMT_TX_CHANNEL);
+    // set counter clock to 40MHz
+        // set counter clock to 40MHz
+    config.clk_div = 2;
+
+    ESP_ERROR_CHECK(rmt_config(&config));
+    ESP_ERROR_CHECK(rmt_driver_install(config.channel, 0, 0));
+
+    // install ws2812 driver
+    led_strip_config_t strip_config = LED_STRIP_DEFAULT_CONFIG(1, (led_strip_dev_t)config.channel);
+    strip = led_strip_new_rmt_ws2812(&strip_config);
+    if (!strip) {
+        ESP_LOGE(TAG, "install WS2812 driver failed");
+    }
+    // Clear LED strip (turn off all LEDs)
+    ESP_ERROR_CHECK(strip->clear(strip, 100));
+}
+
 
 static void configure_pins(usb_hal_context_t *usb)
 {
@@ -63,6 +112,11 @@ void setup_usb(void)
 StackType_t  usb_device_stack[USBD_STACK_SIZE];
 StaticTask_t usb_device_taskdef;
 
+// Create a task for midi
+#define MIDI_STACK_SIZE     configMINIMAL_STACK_SIZE
+StackType_t  midi_stack[MIDI_STACK_SIZE];
+StaticTask_t midi_taskdef;
+
 
 // USB Device Driver task
 // This top level thread process all usb events and invoke callbacks
@@ -82,56 +136,106 @@ void usb_device_task(void* param)
   }
 }
 
-// Invoked when received GET_REPORT control request
-// Application must fill buffer report's content and return its length.
-// Return zero will cause the stack to STALL request
-uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
+uint32_t colors[7] = {0xFFFFFF, 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF};
+int color_index = 0;
+void midi_task(void* param)
 {
-  // TODO not Implemented
-  (void) instance;
-  (void) report_id;
-  (void) report_type;
-  (void) buffer;
-  (void) reqlen;
+  (void) param;
+  // static uint32_t start_ms = 0;
 
-  return 0;
+  // uint8_t const cable_num = 0; // MIDI jack associated with USB endpoint
+  // uint8_t const channel   = 0; // 0 for channel 1
+
+  // The MIDI interface always creates input and output port/jack descriptors
+  // regardless of these being used or not. Therefore incoming traffic should be read
+  // (possibly just discarded) to avoid the sender blocking in IO
+  uint8_t packet[4];
+  while ( tud_midi_available() ) 
+  {
+    tud_midi_packet_read(packet); 
+    set_color(0, colors[color_index % 7], 32);
+    update_strip();
+    color_index++;
+    tud_midi_packet_write(packet); 
+  }
 }
 
-// Invoked when received SET_REPORT control request or
-// received data on OUT endpoint ( Report ID = 0, Type = 0 )
-void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
+static inline uint32_t board_millis(void)
 {
-  (void) instance;
-
-  // if (report_type == HID_REPORT_TYPE_OUTPUT)
-  // {
-  //   // Set keyboard LED e.g Capslock, Numlock etc...
-  //   if (report_id == REPORT_ID_KEYBOARD)
-  //   {
-  //     // bufsize should be (at least) 1
-  //     if ( bufsize < 1 ) return;
-
-  //     uint8_t const kbd_leds = buffer[0];
-
-  //     if (kbd_leds & KEYBOARD_LED_CAPSLOCK)
-  //     {
-  //       // Capslock On: disable blink, turn led on
-  //       // xTimerStop(blinky_tm, portMAX_DELAY);
-  //       // board_led_write(true);
-  //     }else
-  //     {
-  //       // Caplocks Off: back to normal blink
-  //       // board_led_write(false);
-  //       // xTimerStart(blinky_tm, portMAX_DELAY);
-  //     }
-  //   }
-  // }
+  return ( ( ((uint64_t) xTaskGetTickCount()) * 1000) / configTICK_RATE_HZ );
 }
+
+
+// // Variable that holds the current position in the sequence.
+// uint32_t note_pos = 0;
+
+// // Store example melody as an array of note values
+// uint8_t note_sequence[] =
+// {
+//   74,78,81,86,90,93,98,102,57,61,66,69,73,78,81,85,88,92,97,100,97,92,88,85,81,78,
+//   74,69,66,62,57,62,66,69,74,78,81,86,90,93,97,102,97,93,90,85,81,78,73,68,64,61,
+//   56,61,64,68,74,78,81,86,90,93,98,102
+// };
+
+// void midi_task(void* param)
+// {
+//   (void) param;
+
+//   static uint32_t start_ms = 0;
+
+//   uint8_t const cable_num = 0; // MIDI jack associated with USB endpoint
+//   uint8_t const channel   = 0; // 0 for channel 1
+
+//   // The MIDI interface always creates input and output port/jack descriptors
+//   // regardless of these being used or not. Therefore incoming traffic should be read
+//   // (possibly just discarded) to avoid the sender blocking in IO
+//   uint8_t packet[4];
+//   while ( tud_midi_available() ) tud_midi_packet_read(packet);
+
+//   // send note periodically
+//   if (board_millis() - start_ms < 286) return; // not enough time
+//   start_ms += 286;
+
+//   // Previous positions in the note sequence.
+//   int previous = note_pos - 1;
+
+//   // If we currently are at position 0, set the
+//   // previous position to the last note in the sequence.
+//   if (previous < 0) previous = sizeof(note_sequence) - 1;
+
+//   // Send Note On for current position at full velocity (127) on channel 1.
+//   uint8_t note_on[3] = { 0x90 | channel, note_sequence[note_pos], 127 };
+//   tud_midi_stream_write(cable_num, note_on, 3);
+
+//   // Send Note Off for previous note.
+//   uint8_t note_off[3] = { 0x80 | channel, note_sequence[previous], 0};
+//   tud_midi_stream_write(cable_num, note_off, 3);
+
+//   set_color(0, colors[note_pos % 7], 32);
+//   update_strip();
+
+//   // Increment position
+//   note_pos++;
+
+//   // If we are at the end of the sequence, start over.
+//   if (note_pos >= sizeof(note_sequence)) note_pos = 0;
+// }
 
 void app_main(void)
 {
     setup_usb();
-    // setup_rmt();
+    setup_led();
+    tusb_init();
+
+    set_color(0, 0x00FFFF, 128);
+    update_strip();
+
+    // while (1)
+    // {
+    //   // tinyusb device task
+    //   // tud_task();
+    //   // midi_task();
+    // }
 
     // usb_device_task(0);
     // Create a task for tinyusb device stack
@@ -140,5 +244,14 @@ void app_main(void)
     // Create LED task
     // led_task(0);
     // (void) xTaskCreate( led_task, "led", LED_STACK_SZIE, NULL, configMAX_PRIORITIES-2, &led_taskdef);
+
+    // Create Midi task
+    // (void) xTaskCreateStatic( midi_task, "midi", MIDI_STACK_SIZE, NULL, configMAX_PRIORITIES-2, midi_stack, &midi_taskdef);
+    while (1)
+    {
+      // tinyusb device task
+      // tud_task();
+      midi_task(0);
+    }
 
 }
