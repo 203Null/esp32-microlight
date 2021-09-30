@@ -1,0 +1,180 @@
+#include <stdint.h>
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include "sdkconfig.h"
+
+#include "esp_rom_gpio.h"
+#include "hal/gpio_ll.h"
+#include "hal/usb_hal.h"
+#include "soc/usb_periph.h"
+
+#include "driver/periph_ctrl.h"
+#include "driver/rmt.h"
+
+// #include "tinyusb.h"
+#include "tusb.h"
+#include "led_strip.h"
+
+static const char *TAG = "Microlight";
+
+#define RMT_TX_CHANNEL RMT_CHANNEL_0
+
+led_strip_t *strip;
+
+void set_color(uint8_t index, uint32_t color, uint8_t brightness) //index是LED的位置， color是颜色
+{
+    //Color = 00000000RRRRRRRRGGGGGGGGBBBBBBB
+    uint16_t R = (color & 0xFF0000) >> 16; //00000000 00000000 00000000 RRRRRRRR
+    uint16_t G = (color & 0x00FF00) >> 8; //00000000 00000000 00000000 RRRRRRRR
+    uint16_t B = color & 0x0000FF;
+    if(brightness != 255)
+    {
+        R = (R * brightness) >> 8;
+        G = (G * brightness) >> 8;
+        B = (B * brightness) >> 8;
+    }
+    strip->set_pixel(strip, index, R, G, B);
+}
+
+void update_strip()
+{
+    strip->refresh(strip, 100);
+}
+
+void delay(uint32_t ms)
+{
+    vTaskDelay(pdMS_TO_TICKS(ms));
+}
+
+void setup_rmt(void) //配置WS2812驱动硬件（RMT)
+{
+     rmt_config_t config = RMT_DEFAULT_CONFIG_TX(14, RMT_TX_CHANNEL);
+    // set counter clock to 40MHz
+        // set counter clock to 40MHz
+    config.clk_div = 2;
+
+    ESP_ERROR_CHECK(rmt_config(&config));
+    ESP_ERROR_CHECK(rmt_driver_install(config.channel, 0, 0));
+
+    // install ws2812 driver
+    led_strip_config_t strip_config = LED_STRIP_DEFAULT_CONFIG(64, (led_strip_dev_t)config.channel);
+    strip = led_strip_new_rmt_ws2812(&strip_config);
+    if (!strip) {
+        ESP_LOGE(TAG, "install WS2812 driver failed");
+    }
+    // Clear LED strip (turn off all LEDs)
+    ESP_ERROR_CHECK(strip->clear(strip, 100));
+}
+
+#define DELAY_MS 100
+#define BRIGHTNESS 32
+uint32_t colors[7] = {0xFFFFFF, 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF};
+void led_task(void* param)
+{   
+    ESP_LOGE(TAG, "LED Task");
+    uint32_t color_index = 0;
+    while(true)
+    {
+        for(uint32_t i = 0; i < 64; i++)
+        {
+            set_color(i, 0x00FFFF, BRIGHTNESS);
+            update_strip();
+            delay(DELAY_MS);
+        }
+        color_index ++;
+        for(uint32_t i = 0; i < 64; i++)
+        {
+            set_color(i, 0xFF00FF, BRIGHTNESS);
+            update_strip();
+            delay(DELAY_MS);
+        }
+        color_index ++;
+    }
+}
+
+// #define CFG_TUSB_CONFIG_FILE "microlight_tusb_config.h"
+
+static void configure_pins(usb_hal_context_t *usb)
+{
+  /* usb_periph_iopins currently configures USB_OTG as USB Device.
+   * Introduce additional parameters in usb_hal_context_t when adding support
+   * for USB Host.
+   */
+  for (const usb_iopin_dsc_t *iopin = usb_periph_iopins; iopin->pin != -1; ++iopin) {
+    if ((usb->use_external_phy) || (iopin->ext_phy_only == 0)) {
+      esp_rom_gpio_pad_select_gpio(iopin->pin);
+      if (iopin->is_output) {
+        esp_rom_gpio_connect_out_signal(iopin->pin, iopin->func, false, false);
+      } else {
+        esp_rom_gpio_connect_in_signal(iopin->pin, iopin->func, false);
+        if ((iopin->pin != GPIO_FUNC_IN_LOW) && (iopin->pin != GPIO_FUNC_IN_HIGH)) {
+          gpio_ll_input_enable(&GPIO, iopin->pin);
+        }
+      }
+      esp_rom_gpio_pad_unhold(iopin->pin);
+    }
+  }
+  if (!usb->use_external_phy) {
+    gpio_set_drive_capability(USBPHY_DM_NUM, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(USBPHY_DP_NUM, GPIO_DRIVE_CAP_3);
+  }
+}
+
+void setup_usb(void)
+{   
+    // USB Controller Hal init
+    periph_module_reset(PERIPH_USB_MODULE);
+    periph_module_enable(PERIPH_USB_MODULE);
+
+    usb_hal_context_t hal = {
+        .use_external_phy = false // use built-in PHY
+    };
+    usb_hal_init(&hal);
+    configure_pins(&hal);
+}
+
+// Create a task for tinyusb device stack
+#define USBD_STACK_SIZE     (3*configMINIMAL_STACK_SIZE/2)
+StackType_t  usb_device_stack[USBD_STACK_SIZE];
+StaticTask_t usb_device_taskdef;
+
+// static task for hid
+#define LED_STACK_SZIE      configMINIMAL_STACK_SIZE
+StackType_t  led_stack[LED_STACK_SZIE];
+StaticTask_t led_taskdef;
+
+
+// USB Device Driver task
+// This top level thread process all usb events and invoke callbacks
+void usb_device_task(void* param)
+{
+  (void) param;
+
+  // This should be called after scheduler/kernel is started.
+  // Otherwise it could cause kernel issue since USB IRQ handler does use RTOS queue API.
+  tusb_init();
+
+  // RTOS forever loop
+  while (1)
+  {
+    // tinyusb device task
+    tud_task();
+  }
+}
+
+void app_main(void)
+{
+    setup_usb();
+    setup_rmt();
+
+    usb_device_task(0);
+    // Create a task for tinyusb device stack
+    // (void) xTaskCreateStatic( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, usb_device_stack, &usb_device_taskdef);
+
+    // Create LED task
+    // led_task(0);
+    // (void) xTaskCreate( led_task, "led", LED_STACK_SZIE, NULL, configMAX_PRIORITIES-2, &led_taskdef);
+
+}

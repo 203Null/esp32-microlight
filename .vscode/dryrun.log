@@ -1,0 +1,6 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: Entering directory `c:/Users/caine/Documents/GitHub/esp32-microlight'
+make.exe: Leaving directory `c:/Users/caine/Documents/GitHub/esp32-microlight'
+ 
+C:\esp-idf/make/project.mk:114: *** IDF_PATH cannot contain colons. If overriding IDF_PATH on Windows, use MSYS Unix-style /c/dir instead of C:/dir.  Stop.
+ 

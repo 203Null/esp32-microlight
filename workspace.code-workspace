@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\..\\..\\..\\esp-idf\\components\\tinyusb"
+		}
+	],
+	"settings": {
+		"terminal.integrated.shell.windows" : "cmd.exe",
+		"terminal.integrated.shellArgs.windows" : [
+			"/k",
+			"C:/esp-idf/export.bat"
+		],
+		"files.associations": {
+			"*.mk": "makefile",
+			"sdkconfig.h": "c"
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "C:/esp-idf/components/bootloader/subproject",
+    "build_dir":          "C:/Users/caine/Documents/GitHub/esp32-microlight/build/bootloader",
+    "config_file":        "C:/Users/caine/Documents/GitHub/esp32-microlight/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.4-dev-3235-g3e370c4296-dirty",
+    "target":             "esp32s3",
+    "rev":                "",
+    "phy_data_partition": "",
+    "monitor_baud" :      "115200",
+    "monitor_toolprefix": "xtensa-esp32s3-elf-",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "C:/esp-idf/components/efuse/Kconfig;C:/esp-idf/components/esp32s3/Kconfig;C:/esp-idf/components/esp_common/Kconfig;C:/esp-idf/components/esp_hw_support/Kconfig;C:/esp-idf/components/esp_system/Kconfig;C:/esp-idf/components/freertos/Kconfig;C:/esp-idf/components/hal/Kconfig;C:/esp-idf/components/log/Kconfig;C:/esp-idf/components/newlib/Kconfig;C:/esp-idf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/esp-idf/components/bootloader/Kconfig.projbuild;C:/esp-idf/components/esp_rom/Kconfig.projbuild;C:/esp-idf/components/esptool_py/Kconfig.projbuild;C:/esp-idf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32s3", "esp_common", "esp_hw_support", "esp_rom", "esp_system", "esptool_py", "freertos", "hal", "log", "main", "micro-ecc", "newlib", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "C:/esp-idf/components/bootloader", "C:/esp-idf/components/bootloader_support", "C:/esp-idf/components/efuse", "C:/esp-idf/components/esp32s3", "C:/esp-idf/components/esp_common", "C:/esp-idf/components/esp_hw_support", "C:/esp-idf/components/esp_rom", "C:/esp-idf/components/esp_system", "C:/esp-idf/components/esptool_py", "C:/esp-idf/components/freertos", "C:/esp-idf/components/hal", "C:/esp-idf/components/log", "C:/esp-idf/components/bootloader/subproject/main", "C:/esp-idf/components/bootloader/subproject/components/micro-ecc", "C:/esp-idf/components/newlib", "C:/esp-idf/components/partition_table", "C:/esp-idf/components/soc", "C:/esp-idf/components/spi_flash", "C:/esp-idf/components/xtensa", "" ]
+}
