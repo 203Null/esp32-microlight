@@ -56,7 +56,6 @@ void setup_led(void) //配置WS2812驱动硬件（RMT)
 {
     rmt_config_t config = RMT_DEFAULT_CONFIG_TX(14, RMT_TX_CHANNEL);
     // set counter clock to 40MHz
-        // set counter clock to 40MHz
     config.clk_div = 2;
 
     ESP_ERROR_CHECK(rmt_config(&config));
@@ -146,14 +145,6 @@ int color_index = 0;
 void midi_task(void* param)
 {
   (void) param;
-  // static uint32_t start_ms = 0;
-
-  // uint8_t const cable_num = 0; // MIDI jack associated with USB endpoint
-  // uint8_t const channel   = 0; // 0 for channel 1
-
-  // The MIDI interface always creates input and output port/jack descriptors
-  // regardless of these being used or not. Therefore incoming traffic should be read
-  // (possibly just discarded) to avoid the sender blocking in IO
   uint8_t packet[4];
   while ( tud_midi_available() ) 
   {
@@ -174,10 +165,6 @@ void midi_task(void* param)
         }
       }
     }
-    // set_color(0, colors[color_index % 7], 32);
-    // update_strip();
-    // color_index++;
-    // tud_midi_packet_write(packet); 
   }
 }
 
@@ -196,34 +183,14 @@ void app_main(void)
     setup_led();
     tusb_init();
 
-    // set_color(0, 0x00FFFF, 128);
 
-    // while (1)
-    // {
-    //   // tinyusb device task
-    //   // tud_task();
-    //   // midi_task();
-    // }
-
-    // usb_device_task(0);
     // Create a task for tinyusb device stack
     (void) xTaskCreateStatic( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, usb_device_stack, &usb_device_taskdef);
-    
-    // Create LED task
-    // led_task(0);
-    // (void) xTaskCreate( led_task, "led", LED_STACK_SZIE, NULL, configMAX_PRIORITIES-2, &led_taskdef);
 
-    // Create Midi task
-    // (void) xTaskCreateStatic( midi_task, "midi", MIDI_STACK_SIZE, NULL, configMAX_PRIORITIES-2, midi_stack, &midi_taskdef);
+    Create Midi task
+    (void) xTaskCreateStatic( midi_task, "midi", MIDI_STACK_SIZE, NULL, configMAX_PRIORITIES-2, midi_stack, &midi_taskdef);
 
     // soft timer for led update
     led_tm = xTimerCreateStatic(NULL, pdMS_TO_TICKS(10), true, NULL, update_strip, &led_tmdef);
     xTimerStart(led_tm, 0);
-    while (1)
-    {
-      // tinyusb device task
-      // tud_task();
-      midi_task(0);
-    }
-
 }
