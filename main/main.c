@@ -25,6 +25,8 @@ static const char *TAG = "Microlight";
 
 #define RMT_TX_CHANNEL RMT_CHANNEL_0
 
+#define LED_GPIO GPIO_NUM_15
+
 led_strip_t *strip;
 
 void set_color(uint8_t index, uint32_t color, uint8_t brightness) //index是LED的位置， color是颜色
@@ -54,7 +56,7 @@ void delay(uint32_t ms)
 
 void setup_led(void) //配置WS2812驱动硬件（RMT)
 {
-    rmt_config_t config = RMT_DEFAULT_CONFIG_TX(14, RMT_TX_CHANNEL);
+    rmt_config_t config = RMT_DEFAULT_CONFIG_TX(LED_GPIO, RMT_TX_CHANNEL); //Change GPIO Here
     // set counter clock to 40MHz
     config.clk_div = 2;
 
@@ -78,7 +80,7 @@ static void configure_pins(usb_hal_context_t *usb)
    * Introduce additional parameters in usb_hal_context_t when adding support
    * for USB Host.
    */
-  for (const usb_iopin_dsc_t *iopin = usb_periph_iopins; iopin->pin != -1; ++iopin) {
+    for (const usb_iopin_dsc_t *iopin = usb_periph_iopins; iopin->pin != -1; ++iopin) {
     if ((usb->use_external_phy) || (iopin->ext_phy_only == 0)) {
       esp_rom_gpio_pad_select_gpio(iopin->pin);
       if (iopin->is_output) {
@@ -112,21 +114,21 @@ void setup_usb(void)
 }
 
 // Create a task for tinyusb device stack
-#define USBD_STACK_SIZE     (3*configMINIMAL_STACK_SIZE/2)
+#define USBD_STACK_SIZE     (3*configMINIMAL_STACK_SIZE)
 StackType_t  usb_device_stack[USBD_STACK_SIZE];
 StaticTask_t usb_device_taskdef;
 
 // Create a task for midi
-#define MIDI_STACK_SIZE     configMINIMAL_STACK_SIZE
+#define MIDI_STACK_SIZE     3*configMINIMAL_STACK_SIZE
 StackType_t  midi_stack[MIDI_STACK_SIZE];
 StaticTask_t midi_taskdef;
 
 
 // USB Device Driver task
 // This top level thread process all usb events and invoke callbacks
-void usb_device_task(void* param)
+void usb_device_task()
 {
-  (void) param;
+  // (void) param;
 
   // This should be called after scheduler/kernel is started.
   // Otherwise it could cause kernel issue since USB IRQ handler does use RTOS queue API.
@@ -136,6 +138,7 @@ void usb_device_task(void* param)
   while (1)
   {
     // tinyusb device task
+    ESP_LOGD(TAG, "TUSB Task");
     tud_task();
   }
 }
@@ -146,25 +149,31 @@ void midi_task(void* param)
 {
   (void) param;
   uint8_t packet[4];
-  while ( tud_midi_available() ) 
+  while (1)
   {
-    tud_midi_packet_read(packet); 
-    switch (packet[0]) 
+    while ( tud_midi_available() ) 
     {
-      case 0x08: //CIN_NOTE_OFF
-      case 0x09: //CIN_NOTE_ON
+      ESP_LOGD(TAG, "Midi Recived");
+      tud_midi_packet_read(packet); 
+      switch (packet[0]) 
       {
-        uint8_t channel = packet[1] & 0x0F;
-        uint8_t note = packet[2];
-        uint8_t velocity = packet[3];
+        case 0x08: //CIN_NOTE_OFF
+        case 0x09: //CIN_NOTE_ON
+        {
+          uint8_t channel = packet[1] & 0x0F;
+          uint8_t note = packet[2];
+          uint8_t velocity = packet[3];
 
-        if (note > 35 && note < 100)
-        {   
-          uint8_t index = user1_keymap_optimized[note - 36];
-          set_color(index, palette[channel % 2][velocity], BRIGHTNESS);
+          if (note > 35 && note < 100)
+          {   
+            uint8_t index = user1_keymap_optimized[note - 36];
+            set_color(index, palette[channel % 2][velocity], BRIGHTNESS);
+            // ESP_LOGI(TAG, "Set Color");
+          }
         }
       }
     }
+    vTaskDelay(pdMS_TO_TICKS(10));
   }
 }
 
@@ -181,16 +190,16 @@ void app_main(void)
 {
     setup_usb();
     setup_led();
-    tusb_init();
-
 
     // Create a task for tinyusb device stack
     (void) xTaskCreateStatic( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, usb_device_stack, &usb_device_taskdef);
 
-    Create Midi task
+    // Create Midi task
     (void) xTaskCreateStatic( midi_task, "midi", MIDI_STACK_SIZE, NULL, configMAX_PRIORITIES-2, midi_stack, &midi_taskdef);
 
     // soft timer for led update
     led_tm = xTimerCreateStatic(NULL, pdMS_TO_TICKS(10), true, NULL, update_strip, &led_tmdef);
     xTimerStart(led_tm, 0);
+
+    // usb_device_task();
 }

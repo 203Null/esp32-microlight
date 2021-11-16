@@ -7,8 +7,10 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 
 # This program built for i386-pc-mingw32
  
+makefile:8: C:\esp-idf/make/project.mk: No such file or directory
+ 
 
-# Make data base, printed on Wed Sep 29 22:58:07 2021
+# Make data base, printed on Mon Nov 15 06:18:03 2021
 
 # Variables
 
@@ -19,13 +21,13 @@ POWERSHELL_DISTRIBUTION_CHANNEL = MSI:Windows 10 Pro for Workstations
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # makefile
-MAKEFLAGS = Rrqp
+MAKEFLAGS = Rrp
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-PLATFORMIO_IDE = 2.3.3
+PLATFORMIO_IDE = 2.4.0
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -46,12 +48,10 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 PYCHARM COMMUNITY EDITION = C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;
 # environment
 ONEDRIVE = C:\Users\caine\OneDrive
-# makefile (from `C:\esp-idf/make/project.mk', line 53)
-NON_INTERACTIVE_TARGET = defconfig clean% %clean help list-components print_flash_cmd check_python_dependencies
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
-# makefile (from `C:\esp-idf/make/project.mk', line 1)
-MAKEFILE_LIST :=  makefile C:\esp-idf/make/project.mk
+# makefile (from `makefile', line 1)
+MAKEFILE_LIST :=  makefile
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -63,7 +63,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-e07bc5e1-f8b7-4138-8ba9-6d79633e40b4-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5f0c83e3-040e-47e5-bf89-1c8d0960c7ac-sock
 # environment
 VSCODE_CWD = C:\Users\caine\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -78,8 +78,7 @@ CHOCOLATEYLASTPATHUPDATE = 132772852816514184
 PROCESSOR_ARCHITECTURE = x86
 # environment
 USERPROFILE = C:\Users\caine
-# 
- environment
+# environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
 ALLUSERSPROFILE = C:\ProgramData
@@ -96,7 +95,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14508_YYWLCKMYGOAPIQUK
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_9548_XDYHQULXONFUCOXF
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -116,7 +115,7 @@ PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\caine\AppData\Roaming\Code\CachedData\7f6ab5485bbc008386c4386d08766667e155244e
+VSCODE_CODE_CACHE_PATH = C:\Users\caine\AppData\Roaming\Code\CachedData\3a6960b964327f0e3882ce18fcebd07ed191b316
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
@@ -132,17 +131,17 @@ USERDOMAIN = WORKSTATION
 # environment
 MIC_LD_LIBRARY_PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\compiler\lib\mic
 # environment
-PLATFORMIO_PATH = C:\Users\caine\.platformio\python3;c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\nodejs\;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Users\caine\AppData\Roaming\npm;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;;c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\nodejs\;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Users\caine\AppData\Roaming\npm;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;
+PLATFORMIO_PATH = C:\Users\caine\.platformio\python3;c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;C:\Users\caine\AppData\Roaming\npm;c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;C:\Users\caine\AppData\Roaming\npm
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-PATH = c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\nodejs\;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Users\caine\AppData\Roaming\npm;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;
+PATH = c:\program files (x86)\common files\oracle\java\javapath;c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;c:\program files\dotnet\;c:\program files\powershell\7\;c:\program files\010 editor;c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility;c:\program files\git\cmd;c:\program files\cmake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Users\caine\AppData\Local\Microsoft\WindowsApps;C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\caine\AppData\Local\GitHubDesktop\bin;C:\Users\caine\.dotnet\tools;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin;;C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin;C:\Program Files\openocd\bin;C:\Program Files (x86)\dfu-util;C:\esp-idf\tools;C:\Program Files\qemu;C:\Users\caine\AppData\Roaming\npm
 # default
 MAKE_VERSION := 3.81
 # makefile
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := 
 # environment
 PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
@@ -164,7 +163,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\880fbc79ab1c405137638b8e99e7aab6-1.60.2-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\880fbc79ab1c405137638b8e99e7aab6-1.62.2-main-sock
 # environment
 HOMEPATH = \Users\caine
 # environment
@@ -172,11 +171,11 @@ COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
 PROMPT = $P$G
 # environment
-MFLAGS = -Rrqp
+MFLAGS = -Rrp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# makefile (from `C:\esp-idf/make/project.mk', line 89)
-IDF_PATH := c:/Users/caine/Documents/GitHub/esp32-microlight/C:\esp-idf
+# environment
+IDF_PATH = C:\esp-idf
 # environment
 INTEL_DEV_REDIST = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\
 # environment
@@ -187,8 +186,8 @@ SYSTEMROOT = C:\Windows
 +F = $(notdir $+)
 # environment
 APPDATA = C:\Users\caine\AppData\Roaming
-# makefile (from `C:\esp-idf/make/project.mk', line 84)
-SANITISED_IDF_PATH := c:/Users/caine/Documents/GitHub/esp32-microlight/C:\esp-idf
+# environment
+__COMPAT_LAYER = DetectorsAppHealth
 # environment
 TEMP = C:\Users\caine\AppData\Local\Temp
 # environment
@@ -221,8 +220,6 @@ SESSIONNAME = Console
 PROCESSOR_REVISION = 2100
 # environment
 SW_SIM_MPIT = INTELMPI
-# makefile (from `C:\esp-idf/make/project.mk', line 100)
-IDF_TARGET := esp32
 # environment
 MAKELEVEL := 0
 # environment
@@ -232,11 +229,11 @@ PROCESSOR_LEVEL = 25
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 14508
+VSCODE_PID = 9548
 # environment
 USERDOMAIN_ROAMINGPROFILE = WORKSTATION
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=8/141=6%
+# Load=109/1024=11%, Rehash=0, Collisions=12/127=9%
 
 # Pattern-specific Variable Values
 
@@ -244,48 +241,46 @@ USERDOMAIN_ROAMINGPROFILE = WORKSTATION
 
 # Directories
 
-# : could not be stat 
-'d.
-# c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler (key c:/program files (x86)/common files/intel/shared libraries/redist/intel64/compiler, mtime 1621271971): 17 files, no impossibilities.
-# C:\Program Files\Bandizip\ (key C:/Program Files/Bandizip/, mtime 1626817116): 22 files, no impossibilities.
-# C:\Program Files\qemu (key C:/Program Files/qemu, mtime 1628323019): 126 files, no impossibilities.
-# C:\Program Files\openocd\bin (key C:/Program Files/openocd/bin, mtime 1615826737): 6 files, no impossibilities.
-# c:\windows\system32\windowspowershell\v1.0\ (key c:/windows/system32/windowspowershell/v1.0/, mtime 1632812015): 26 files, no impossibilities.
-# c:\windows\system32\wbem (key c:/windows/system32/wbem, mtime 1631917056): 170 files, no impossibilities.
-# . (key c:/Users/caine/Documents/GitHub/esp32-microlight, mtime 1632970685): 14 files, no impossibilities.
-# C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\ (key C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/, mtime 1631373920): 73 files, no impossibilities.
-# c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility (key c:/program files (x86)/stmicroelectronics/stm32 st-link utility/st-link utility, mtime 1632552778): 12 files, no impossibilities.
-# c:\program files\nodejs\ (key c:/program files/nodejs/, mtime 1624503405): 11 files, no impossibilities.
-# C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1631373978): 11 files, no impossibilities.
-# C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ (key C:/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn/, mtime 1631373864): 12 files, no impossibilities.
-# C:\esp-idf\tools (key C:/esp-idf/tools, mtime 1632853049): 50 files, no impossibilities.
-# C:\Program Files\Microsoft SQL Server\120\DTS\Binn\ (key C:/Program Files/Microsoft SQL Server/120/DTS/Binn/, mtime 1631373873): 38 files, no impossibilities.
-# C:\ProgramData\chocolatey\bin (key C:/ProgramData/chocolatey/bin, mtime 1632811691): 13 files, no impossibilities.
-# c:\program files\dotnet\ (key c:/program files/dotnet/, mtime 1627614236): 11 files, no impossibilities.
-# c:\program files\010 editor (key c:/program files/010 editor, mtime 1621219912): 36 files, no impossibilities.
-# c:\program files\powershell\7\ (key c:/program files/powershell/7/, mtime 1621175001): 471 files, no impossibilities.
-# C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/caine/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1632333174): 4 files, no impossibilities.
-# C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn/, mtime 1631373873): 6 files, no impossibilities.
+# : could not be stat'd.
+# c:\program files (x86)\common files\intel\shared libraries\redist\intel64\compiler (key c:/program files (x86)/common files/intel/shared libraries/redist/intel64/compiler, mtime 1621268371): 17 files, no impossibilities.
+# C:\Program Files\Bandizip\ (key C:/Program Files/Bandizip/, mtime 1626813516): 22 files, no impossibilities.
+# C:\Program Files\qemu (key C:/Program Files/qemu, mtime 1628319419): 126 files, no impossibilities.
+# C:\Program Files\openocd\bin (key C:/Program Files/openocd/bin, mtime 1615823137): 6 files, no impossibilities.
+# c:\windows\system32\windowspowershell\v1.0\ (key c:/windows/system32/windowspowershell/v1.0/, mtime 1632808415): 26 files, no impossibilities.
+# c:\windows\system32\wbem (key c:/windows/system32/wbem, mtime 1636598293): 170 files, no impossibilities.
+# . (key c:/Users/caine/Documents/GitHub/esp32-microlight, mtime 1635407697): 19 files, no impossibilities.
+# C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\ (key C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/, mtime 1631370320): 73 files, no impossibilities.
+# c:\program files (x86)\stmicroelectronics\stm32 st-link utility\st-link utility (key c:/program files (x86)/stmicroelectronics/stm32 st-link utility/st-link utility, mtime 1632549178): 12 files, no impossibilities.
+# C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1636695112): 13 files, no impossibilities.
+# C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1631370378): 11 files, no impossibilities.
+# C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ (key C:/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn/, mtime 1631370264): 12 files, no impossibilities.
+# C:\esp-idf\tools: could not be stat'd.
+# C:\Program Files\Microsoft SQL Server\120\DTS\Binn\ (key C:/Program Files/Microsoft SQL Server/120/DTS/Binn/, mtime 1631370273): 38 files, no impossibilities.
+# C:\ProgramData\chocolatey\bin (key C:/ProgramData/chocolatey/bin, mtime 1632808091): 13 files, no impossibilities.
+# c:\program files\dotnet\ (key c:/program files/dotnet/, mtime 1627610636): 11 files, no impossibilities.
+# c:\program files\010 editor (key c:/program files/010 editor, mtime 1621216312): 36 files, no impossibilities.
+# c:\program files\powershell\7\ (key c:/program files/powershell/7/, mtime 1621171401): 471 files, no impossibilities.
+# C:\Users\caine\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/caine/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1636693981): 4 files, no impossibilities.
+# C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn/, mtime 1631370273): 6 files, no impossibilities.
 # c:\windows\system32\openssh\: could not be stat'd.
-# c:\program files (x86)\common files\oracle\java\javapath (key c:/program files (x86)/common files/oracle/java/javapath, mtime 1623896835): 5 files, no impossibilities.
-# C:\Program Files (x86)\dfu-util (key C:/Program Files (x86)/dfu-util, mtime 1628230107): 4 files, no impossibilities.
-# C:\Users\caine\AppData\Roaming\npm (key C:/Users/caine/AppData/Roaming/npm, mtime 1624503400): 2 files, no impossibilities.
+# c:\program files (x86)\common files\oracle\java\javapath (key c:/program files (x86)/common files/oracle/java/javapath, mtime 1623893235): 5 files, no impossibilities.
+# C:\Program Files (x86)\dfu-util (key C:/Program Files (x86)/dfu-util, mtime 1628226507): 4 files, no impossibilities.
+# C:\Users\caine\AppData\Roaming\npm (key C:/Users/caine/AppData/Roaming/npm, mtime 1636696104): 9 files, no impossibilities.
 # C:\Users\caine\.dotnet\tools: could not be stat'd.
-# c:\windows (key c:/windows, mtime 1632811558): 116 files, no impossibilities.
-# C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin (key C:/Program Files (x86)/GNU Arm Embedded Toolc 
-hain/10 2020-q4-major/bin, mtime 1624692215): 35 files, no impossibilities.
-# C:\Users\caine\AppData\Local\GitHubDesktop\bin (key C:/Users/caine/AppData/Local/GitHubDesktop/bin, mtime 1621981644): 4 files, no impossibilities.
-# C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin (key C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin, mtime 1627444344): 32 files, no impossibilities.
-# C:\Program Files\Microsoft SQL Server\120\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/120/Tools/Binn/, mtime 1631373864): 14 files, no impossibilities.
-# C:\Users\caine\AppData\Local\Microsoft\WindowsApps (key C:/Users/caine/AppData/Local/Microsoft/WindowsApps, mtime 1632811418): 27 files, no impossibilities.
-# C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin (key C:/Program Files/JetBrains/PyCharm Community Edition 2021.1.3/bin, mtime 1626538862): 29 files, no impossibilities.
-# c:\program files\git\cmd (key c:/program files/git/cmd, mtime 1624082500): 8 files, no impossibilities.
-# c:\windows\system32 (key c:/windows/system32, mtime 1632960696): 3106 files, no impossibilities.
-# c:\program files\cmake\bin (key c:/program files/cmake/bin, mtime 1624948798): 7 files, no impossibilities.
-# c:\program files\nvidia corporation\nvidia nvdlisr (key c:/program files/nvidia corporation/nvidia nvdlisr, mtime 1620801995): 5 files, no impossibilities.
-# C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1624691723): 5 files, no impossibilities.
+# c:\windows (key c:/windows, mtime 1636866432): 119 files, no impossibilities.
+# C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin (key C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2020-q4-major/bin, mtime 1624688615): 35 files, no impossibilities.
+# C:\Users\caine\AppData\Local\GitHubDesktop\bin (key C:/Users/caine/AppData/Local/GitHubDesktop/bin, mtime 1621978044): 4 files, no impossibilities.
+# C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin (key C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin, mtime 1627440744): 32 files, no impossibilities.
+# C:\Program Files\Microsoft SQL Server\120\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/120/Tools/Binn/, mtime 1631370264): 14 files, no impossibilities.
+# C:\Users\caine\AppData\Local\Microsoft\WindowsApps (key C:/Users/caine/AppData/Local/Microsoft/WindowsApps, mtime 1636533460): 28 files, no impossibilities.
+# C:\Program Files\JetBrains\PyCharm Community Edition 2021.1.3\bin (key C:/Program Files/JetBrains/PyCharm Community Edition 2021.1.3/bin, mtime 1626535262): 29 files, no impossibilities.
+# c:\program files\git\cmd (key c:/program files/git/cmd, mtime 1624078900): 8 files, no impossibilities.
+# c:\windows\system32 (key c:/windows/system32, mtime 1636866619): 3112 files, no impossibilities.
+# c:\program files\cmake\bin (key c:/program files/cmake/bin, mtime 1624945198): 7 files, no impossibilities.
+# c:\program files\nvidia corporation\nvidia nvdlisr (key c:/program files/nvidia corporation/nvidia nvdlisr, mtime 1620798395): 5 files, no impossibilities.
+# C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1624688123): 5 files, no impossibilities.
 
-# 4528 files, no impossibilities in 38 directories.
+# 4502 files, no impossibilities in 38 directories.
 
 # Implicit Rules
 
@@ -293,13 +288,9 @@ hain/10 2020-q4-major/bin, mtime 1624692215): 35 files, no impossibilities.
 
 # Files
 
-all: all_binaries | check_python_dependencies
+# Not a target:
+all:
 #  Command-line target.
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-.PHONY: build-components menuconfig defconfig all build clean all_binaries check-submodules size size-components size-files size-symbols list-components
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -313,41 +304,8 @@ all: all_binaries | check_python_dependencies
 # Not a target:
 makefile:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  Last modified 2021-09-28 13:15:28
 #  File has not been updated.
-
-help:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `C:\esp-idf/make/project.mk', line 25):
-	@echo "Welcome to Espressif IDF build system. Some useful make targets:"
-	@echo ""
-	@echo "make menuconfig - Configure IDF project"
-	@echo "make defconfig - Set defaults for all new configuration options"
-	@echo ""
-	@echo "make all - Build app, bootloader, partition table"
-	@echo "make flash - Flash app, bootloader, partition table to a chip"
-	@echo "make clean - Remove all build output"
-	@echo "make size - Display the static memory footprint of the app"
-	@echo "make size-components, size-files - Finer-grained memory footprints"
-	@echo "make size-symbols - Per symbol memory footprint. Requires COMPONENT=<component>"
-	@echo "make erase_flash - Erase entire flash contents"
-	@echo "make erase_otadata - Erase ota_data partition; First bootable partition (factory or OTAx) will be used on next boot."
-	@echo "                     This assumes this project's partition table is the one flashed on the device."
-	@echo "make monitor - Run idf_monitor tool to monitor serial output from app"
-	@echo "make simple_monitor - Monitor serial output on terminal console"
-	@echo "make list-components - List all components in the project"
-	@echo ""
-	@echo "make app - Build just the app"
-	@echo "make app-flash - Flash just the app"
-	@echo "make app-clean - Clean just the app"
-	@echo "make print_flash_cmd - Print the arguments for esptool when flash"
-	@echo "make check_python_dependencies - Check that the required python packages are installed"
-	@echo ""
-	@echo "See also 'make bootloader', 'make bootloader-flash', 'make bootloader-clean', "
-	@echo "'make partition_table', etc, etc."
-	
 
 # Not a target:
 .SUFFIXES:
@@ -357,12 +315,14 @@ help:
 
 # Not a target:
 C:\esp-idf/make/project.mk:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
+#  Implicit rule search has been done.
+#  File does not exist.
 #  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/10=0%
+# Load=5/1024=0%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -374,8 +334,8 @@ C:\esp-idf/make/project.mk:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4060 / max = 4060 / min = 4060 / avg = 4060
 
-# Finished Make data base on Wed Sep 29 22:58:07 2021
+# Finished Make data base on Mon Nov 15 06:18:03 2021
 
  
-C:\esp-idf/make/project.mk:114: *** IDF_PATH cannot contain colons. If overriding IDF_PATH on Windows, use MSYS Unix-style /c/dir instead of C:/dir.  Stop.
+make.exe: *** No rule to make target `C:\esp-idf/make/project.mk'.  Stop.
  

@@ -28,7 +28,7 @@ target_sources(${COMPONENT_TARGET} PUBLIC
   "${TINYUSB}/src/class/hid/hid_device.c"
   "${TINYUSB}/src/class/midi/midi_device.c"
   "${TINYUSB}/src/class/msc/msc_device.c"
-  "${TINYUSB}/src/class/net/net_device.c"
+  # "${TINYUSB}/src/class/net/ncm_device.c"
   "${TINYUSB}/src/class/usbtmc/usbtmc_device.c"
   "${TINYUSB}/src/class/vendor/vendor_device.c"
   "${TINYUSB}/src/portable/espressif/esp32sx/dcd_esp32sx.c"
